@@ -73,7 +73,7 @@ header {
     background-color: transparent;
     margin-bottom: calc(-1 * var(--header-height));
     height: var(--header-height);
-    z-index: 999;
+    z-index: 9999;
     position: sticky;
     top: 0;
 }
@@ -99,10 +99,29 @@ header {
     transition: 0.5s all;
     z-index: 100;
     padding: 15px 20px;
+    position: relative;
     border-radius: 50px;
     border: 0.2px solid #dadada17;
     background: linear-gradient(to bottom, rgba(0, 0, 131, 0.279) 0%, rgba(0, 0, 131, 0.153) 0%, rgba(0, 0, 131, 0) 100%);
     backdrop-filter: blur(15px);
+    overflow: hidden;
+}
+
+
+.navigation .glow-line {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 6%;
+    z-index: 99999;
+    background-color: #fff;
+    border-radius: 2px;
+    width: 50px;
+    height: 2px;
+    margin-bottom: -2px;
+    /* margin-left: 33px; */
+    box-shadow: 0 2px 25px 2px #fff;
+    transition: 0.7s all;
 }
 
 .content.visible .header-wrapper .navigation {
@@ -113,6 +132,7 @@ header {
     0% {
         transform: translateY(-100px);
     }
+
     100% {
         transform: translateY(0);
     }
@@ -129,6 +149,7 @@ header {
     font-size: 17px;
     color: #d1d1d1;
     transition: 0.5s all;
+    position: relative;
 }
 
 .navigation .links a:hover {
@@ -317,6 +338,14 @@ header {
 
 }
 
+.content.visible .headline-text {
+    animation: FadeUp 1.5s forwards;
+}
+
+.content.visible .hero-tagline {
+    animation: FadeUp 1.5s forwards;
+}
+
 @keyframes rotate {
     0% {
         transform: rotate(0deg);
@@ -327,7 +356,16 @@ header {
     }
 }
 
+@keyframes FadeUp {
+    0% {
+        transform: translateY(100%);
+    }
 
+    100% {
+        transform: translateY(0%);
+
+    }
+}
 
 /* ---------------------------------------------------------------------------- */
 
@@ -886,7 +924,7 @@ header {
     left: 220px;
 }
 
-.contact-section .left  {
+.contact-section .left {
     position: relative;
 }
 
@@ -925,7 +963,7 @@ header {
 
 .footer .wrapper .social_icon svg {
     fill: #fff;
-    width:  50px;
+    width: 50px;
 }
 
 
@@ -949,36 +987,36 @@ header {
     flex-direction: column;
     gap: 10px;
     transition: all 1s ease;
-  }
-  
-  #loader.hidden {
+}
+
+#loader.hidden {
     opacity: 0;
     pointer-events: none;
-  }
-  
-  #loader-text {
+}
+
+#loader-text {
     font-size: 2rem;
     color: #000000;
     font-family: 'Poppins', sans-serif;
-  }
-  
-  /* Main content hidden initially */
-  .content {
+}
+
+/* Main content hidden initially */
+.content {
     opacity: 0;
     transition: opacity 1s ease-in-out;
-  }
-  
-  .content.visible {
+}
+
+.content.visible {
     opacity: 1;
-  }
-  
-  /* Fade out effect for page transitions */
-  .fade-out {
+}
+
+/* Fade out effect for page transitions */
+.fade-out {
     opacity: 0;
     transition: opacity 2s cubic-bezier(linear);
-  }
-  
-  .load-wrapp {
+}
+
+.load-wrapp {
     float: left;
     width: 100px;
     height: 50px;
@@ -986,13 +1024,13 @@ header {
     padding: 20px 20px 20px;
     border-radius: 5px;
     text-align: center;
-  }
+}
 
-  #loader-text p {
+#loader-text p {
     font-size: 20px;
     color: #fff;
     font-family: var(--headlineFont);
-  }
+}
 
 .line {
     display: inline-block;
@@ -1000,36 +1038,30 @@ header {
     height: 15px;
     border-radius: 15px;
     background-color: #1f679f;
-  }
-
-  .load-1 .line:nth-last-child(1) {
-    animation: loadingA 1.5s 1s infinite;
-  }
-  .load-1 .line:nth-last-child(2) {
-    animation: loadingA 1.5s 0.5s infinite;
-  }
-  .load-1 .line:nth-last-child(3) {
-    animation: loadingA 1.5s 0s infinite;
-  }
-
-  @keyframes loadingA {
-    0% {
-      height: 15px;
-    }
-    50% {
-      height: 35px;
-    }
-    100% {
-      height: 15px;
-    }
-  }
-
-  html, body {
-    margin: 0;
-    height: 100%;
 }
 
-.content {
-    position: relative;
-    height: auto; 
+.load-1 .line:nth-last-child(1) {
+    animation: loadingA 1.5s 1s infinite;
+}
+
+.load-1 .line:nth-last-child(2) {
+    animation: loadingA 1.5s 0.5s infinite;
+}
+
+.load-1 .line:nth-last-child(3) {
+    animation: loadingA 1.5s 0s infinite;
+}
+
+@keyframes loadingA {
+    0% {
+        height: 15px;
+    }
+
+    50% {
+        height: 35px;
+    }
+
+    100% {
+        height: 15px;
+    }
 }

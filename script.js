@@ -1,55 +1,41 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const loader = document.getElementById("loader");
-    const content = document.querySelector(".content");
-  
-    // Preloader animation on page load
-    window.addEventListener("load", () => {
-      setTimeout(() => {
-        loader.classList.add("hidden");
-        content.classList.add("visible");
-      }, 4000); // 4 seconds delay to simulate loading
-    });
-  
-    // Page transition logic
-    const links = document.querySelectorAll("a");
-  
-    links.forEach(link => {
-      link.addEventListener("click", event => {
-        event.preventDefault();
-        const href = link.getAttribute("href");
-  
-        // Fade out current content
-        content.classList.remove("visible");
-        content.classList.add("fade-out");
-  
-        // After fade out, navigate to the new page
-        setTimeout(() => {
-          window.location.href = href;
-        }, 700); // Delay for the fade-out effect
-      });
-    });
+  const loader = document.getElementById("loader");
+  const content = document.querySelector(".content");
 
-    // Smooth scroll effect
-    const scrollWrap = document.getElementsByClassName("smooth-scroll-wrapper")[0];
+  // Preloader animation on page load
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      loader.classList.add("hidden");
+      content.classList.add("visible");
+    }, 2000); // 4 seconds delay to simulate loading
+  });
 
-    function setBodyHeight() {
-        // Ensure the height of body is set based on the content
-        const height = scrollWrap.getBoundingClientRect().height;
-        document.body.style.height = `${Math.floor(height)}px`;
-    }
+  // Select the links and the line element
+const links = document.querySelectorAll('.navigation .links a');
+const line = document.querySelector('.navigation .glow-line');
+const nav = document.querySelector('.navigation');
 
-    // Call setBodyHeight initially and on window resize
-    setBodyHeight();
-    window.addEventListener('resize', setBodyHeight);
+// Function to move the line under the hovered link
+function moveLine(link) {
+    const rect = link.getBoundingClientRect(); // Get the position and size of the link
+    const navRect = link.closest('.navigation').getBoundingClientRect(); // Get the position of the navigation container
 
-    let offset = 0;
-    const speed = 0.04;
+    // Set the width and left position of the line based on the hovered link
+    line.style.width = `${rect.width}px`;
+    line.style.left = `${rect.left - navRect.left}px`;
+}
 
-    function smoothScroll() {
-        offset += (window.pageYOffset - offset) * speed;
-        scrollWrap.style.transform = `translateY(-${offset}px) translateZ(0)`;
-        requestAnimationFrame(smoothScroll);
-    }
+// Set up event listeners for hover
+links.forEach(link => {
+    link.addEventListener('mouseenter', () => moveLine(link));
+});
 
-    smoothScroll();
+// Move back to the first link when hovering out of the navigation
+nav.addEventListener('mouseleave', () => moveLine(links[0]));
+
+
+// Optional: Set the initial position of the line to the first link (HOME)
+document.addEventListener('DOMContentLoaded', () => {
+    moveLine(links[0]); // Initially position the line under the "HOME" link
+});
 });
