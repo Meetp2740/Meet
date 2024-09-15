@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
       loader.classList.add("hidden");
       content.classList.add("visible");
-    }, 50); // 4 seconds delay to simulate loading
+    }, 1000); // 4 seconds delay to simulate loading
   });
 
   // Select the links and the line element
